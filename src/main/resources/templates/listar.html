@@ -43,7 +43,8 @@
 					<th>Apellido</th>
 					<th>Email</th>
 					<th>Fecha</th>
-					<th>Acciones</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
 
 				</tr>
 			</thead>
@@ -55,7 +56,7 @@
 					<td th:text="${clientes.email}"></td>
 					<td th:text="${clientes.createAt}"></td>
 				    <td><a class="btn btn-primary" th:href="@{/form/} + ${clientes.id}">Editar</a></td>
-				     <td><a class="btn btn-danger" th:href="@{/eliminar/} + ${clientes.id}" onclick="return confirm('Estas seguro ?')">Eliminar</a></td>
+				    <td><a class="btn btn-danger" th:href="@{/eliminar/} + ${clientes.id}" onclick="return confirm('Estas seguro ?')">Eliminar</a></td>
 
 
 				</tr>
