@@ -7,4 +7,5 @@ import com.ufps.springboot.app.models.entities.Cliente;
 
 public interface IClienteDao extends CrudRepository<Cliente, Long> {
 
+	
 }
