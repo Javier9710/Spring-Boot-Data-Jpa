@@ -1,7 +1,6 @@
 package com.ufps.springboot.app.util.paginador;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -49,7 +48,7 @@ public class PageRender<T> {
 		}
 
 		for (int i = 0; i < hasta; i++) {
-			paginas.add(new PageItem(desde + 1, paginaActual == desde + i));
+			paginas.add(new PageItem(desde + i, paginaActual == desde + i));
 
 		}
 
