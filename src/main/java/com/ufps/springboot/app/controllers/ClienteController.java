@@ -1,5 +1,6 @@
 package com.ufps.springboot.app.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.http.HttpHeaders;
@@ -145,6 +146,19 @@ public class ClienteController {
 		if (!foto.isEmpty()) {
 			//Path direcctorio = Paths.get("src//main//resources//static/uploads");
 			//String rootPath = "C://Temp//uploads";
+			
+			if (cliente.getId() != null && cliente.getId()>0 && cliente.getFoto()!=null && cliente.getFoto().length()>0) {
+				
+				Path rootPath = Paths.get("uploads").resolve(cliente.getFoto()).toAbsolutePath();
+				File archivo = rootPath.toFile();
+				
+				if (archivo.exists() && archivo.canRead()) {
+					archivo.delete();
+					
+				}
+				
+			}
+			
 			String uniqueFile = UUID.randomUUID().toString()+ "_" + foto.getOriginalFilename();
 			
 			Path rootPath = Paths.get("uploads").resolve(uniqueFile);
@@ -177,9 +191,21 @@ public class ClienteController {
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id,RedirectAttributes flash) {
 		if (id>0) {
+			Cliente cliente = clienteService.findOne(id);
+			
 			clienteService.delete(id);
 			flash.addFlashAttribute("success", "Se ha Eliminado con Exito");
 			
+			Path rootPath = Paths.get("uploads").resolve(cliente.getFoto()).toAbsolutePath();
+			File archivo = rootPath.toFile();
+			
+			if (archivo.exists() && archivo.canRead()) {
+				if(archivo.delete()) {
+					flash.addFlashAttribute("info","foto: "+ cliente.getFoto()+ " Eliminada con exito");
+					
+				}
+				
+			}
 		}
 		return "redirect:/listar";
 	}
