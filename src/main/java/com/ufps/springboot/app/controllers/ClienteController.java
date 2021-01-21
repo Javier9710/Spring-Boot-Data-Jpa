@@ -1,21 +1,26 @@
 package com.ufps.springboot.app.controllers;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +49,29 @@ public class ClienteController {
 	private IClienteService clienteService;
 	
 	private final org.slf4j.Logger log = LoggerFactory.getLogger(getClass());
+	
+	
+	@GetMapping(value = "/uploads/{filename:.+}")
+	public ResponseEntity<UrlResource> verfoto(@PathVariable String filename){
+		Path pathFoto = Paths.get("uploads").resolve(filename).toAbsolutePath();
+		log.info("pathFoto: " + pathFoto);
+		UrlResource recurso = null;
+		try {
+			recurso = new UrlResource(pathFoto.toUri());
+			if (!recurso.exists() && !recurso.isReadable()) {
+				throw new RuntimeException("Error: No se Puede cargar la imagen: " + pathFoto.toString());
+				
+			}
+		
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ResponseEntity.ok()
+				.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+ recurso.getFilename()+"\"").body(recurso);
+		
+	}
 	
 	
 	@GetMapping(value = "/ver/{id}")
