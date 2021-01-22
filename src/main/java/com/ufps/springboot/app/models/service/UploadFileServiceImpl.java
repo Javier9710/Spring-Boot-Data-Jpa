@@ -3,6 +3,7 @@ package com.ufps.springboot.app.models.service;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -66,6 +68,19 @@ public class UploadFileServiceImpl implements IUploadFileService {
 	public Path getPath(String filename) {
 
 		return Paths.get("uploads").resolve(filename).toAbsolutePath();
+	}
+
+	@Override
+	public void deleteAll() {
+		FileSystemUtils.deleteRecursively(Paths.get("uploads").toFile());
+		
+		
+	}
+
+	@Override
+	public void init() throws IOException {
+		Files.createDirectories(Paths.get("uploads"));
+		
 	}
 
 }
