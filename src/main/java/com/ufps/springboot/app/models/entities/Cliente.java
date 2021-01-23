@@ -1,13 +1,16 @@
 package com.ufps.springboot.app.models.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -46,11 +49,28 @@ public class Cliente implements Serializable {
 	
 	private String foto;
 	
+	@OneToMany
+	private List<Factura> facturas;
+	
 	/*
 	@PrePersist
 	public void prePersist() {
 		createAt = new Date();
 	}*/
+	
+
+	public Cliente() {
+		facturas = new ArrayList<Factura>();
+	}
+
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
 
 	public Long getId() {
 		return id;
@@ -102,6 +122,10 @@ public class Cliente implements Serializable {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+	
+	public void addFactura(Factura factura) {
+		facturas.add(factura);
 	}
 	
 	
