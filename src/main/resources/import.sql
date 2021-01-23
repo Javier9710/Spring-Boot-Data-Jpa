@@ -1,3 +1,5 @@
+//Clientes
+
 INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (1, 'Javier', 'Moncada', 'javier@ufps.edu.co','2021-01-13', '');
 INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (2, 'Camilo', 'Boada', 'Camilo@ufps.edu.co','2021-01-12', '');
 INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (3, 'Camilo', 'Boada', 'Camilo@ufps.edu.co','2021-01-12', '');
@@ -23,3 +25,18 @@ INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (22, 
 INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (23, 'Camilo', 'Boada', 'Camilo@ufps.edu.co','2021-01-12', '');
 INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (24, 'Camilo', 'Boada', 'Camilo@ufps.edu.co','2021-01-12', '');
 INSERT INTO clientes (id, nombre, apellido, email, create_at, foto) VALUES (25, 'Camilo', 'Boada', 'Camilo@ufps.edu.co','2021-01-12', '');
+
+//Productos
+
+INSERT INTO productos (create_at, nombre, precio) VALUES(NOW(), 'Pantalla LCD', 12000);
+INSERT INTO productos (create_at, nombre, precio) VALUES(NOW(), 'CPU RYZEN', 12000);
+INSERT INTO productos (create_at, nombre, precio) VALUES(NOW(), 'Placa Aorus', 12000);
+INSERT INTO productos (create_at, nombre, precio) VALUES(NOW(), 'Torre 2', 12000);
+INSERT INTO productos (create_at, nombre, precio) VALUES(NOW(), 'Mouse IN.', 12000);
+INSERT INTO productos (create_at, nombre, precio) VALUES(NOW(), 'Teclado', 12000);
+
+//Facturas
+INSERT INTO facturas (create_at, descripcion, observacion, cliente_id) VALUES (NOW(), 'Factura---1', 'Esta es una factura', 1);
+INSERT INTO facturas_items (cantidad, producto_id, factura_id) VALUES (2, 1, 1);
+INSERT INTO facturas_items (cantidad, producto_id, factura_id) VALUES (3, 2, 1);
+INSERT INTO facturas_items (cantidad, producto_id, factura_id) VALUES (1, 3, 1);
