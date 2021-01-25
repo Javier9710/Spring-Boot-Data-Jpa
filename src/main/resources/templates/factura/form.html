@@ -13,7 +13,8 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 				<h4 class="card-title">
-				<a class="btn btn-primary btn-xs" th:href="@{'/ver/'+${factura.cliente.id}}" th:text="'Volver'"></a>
+					<a class="btn btn-primary btn-xs"
+						th:href="@{'/ver/'+${factura.cliente.id}}" th:text="'Volver'"></a>
 				</h4>
 
 				<form th:action="@{/factura/form/}" th:object="${factura}"
@@ -41,6 +42,14 @@
 								cols=""></textarea>
 						</div>
 					</div>
+
+					<div class="form-group row">
+						<label for="buscar_producto" class="col-sm-2 col-form-label" th:text="'Buscar Producto'"></label>
+						<div class="col-sm-6">
+							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control" />
+						</div>
+					</div>
+
 					<div class="form-group row">
 						<div class="col-sm-6">
 							<input type="submit" th:value="${titulo}"
@@ -52,6 +61,8 @@
 		</div>
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
+	
+	<script type="text/javascript" th:replace="factura/js/auto-complete :: javascript"></script>
 
 </body>
 </html>
