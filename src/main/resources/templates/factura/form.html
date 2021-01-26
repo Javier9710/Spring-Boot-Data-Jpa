@@ -4,7 +4,6 @@
 
 </head>
 <body>
-
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
@@ -30,16 +29,16 @@
 					</div>
 
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label" th:text="'Observacion'"></label>
+						<label for="descripcion" class="col-sm-2 col-form-label" th:text="'Descripcion'"></label>
 						<div class="col-sm-6">
 							<input type="text" th:field="*{descripcion}" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label" th:text="'Descripcion'"></label>
+						<label for="observacion" class="col-sm-2 col-form-label" th:text="'Observacion'"></label>
 						<div class="col-sm-6">
-							<textarea th:field="*{observacion}" class="form-control" rows=""
-								cols=""></textarea>
+							<textarea th:field="*{observacion}" class="form-control"
+								></textarea>
 						</div>
 					</div>
 
@@ -60,9 +59,10 @@
 			</div>
 		</div>
 	</div>
+	
 	<footer th:replace="layout/layout :: footer"></footer>
 	
-	<script type="text/javascript" th:replace="factura/js/auto-complete :: javascript"></script>
-
+	
+<script th:replace="/factura/js/autocomplete-productos :: javascript"></script>
 </body>
 </html>
