@@ -59,6 +59,7 @@ $("#buscar_producto").autocomplete({
 	var itemsHelper = {
 	calcularImporte: function(id , precio, cantidad){
 		$("#total_importe_"+ id).html(parseInt(precio)*parseInt (cantidad));
+		this.calcularTotal();
 	
 	},
 	hasProducto: function(id){
@@ -79,8 +80,17 @@ $("#buscar_producto").autocomplete({
 	},
 	eliminarLinea: function(id){
 		$("#row_"+id).remove();
+		this.calcularTotal();
+	},
 	
-	}
+	calcularTotal: function(){
+		var total=0;
+		$('span[id^="total_importe_"]').each(function(){
+			total += parseInt($(this).html());
+	});
+	
+	$('#gran_total').html(total);
+}
 }
 </script>
 </body>
