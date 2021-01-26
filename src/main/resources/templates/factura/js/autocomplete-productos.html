@@ -47,12 +47,18 @@ $("#buscar_producto").autocomplete({
 		
 		return false;
 	},
+	
 	focus: function(event, ui){
     event.preventDefault();
     $('input[name="buscar_producto"]').val(ui.item.label);
 },
 
 });
+
+	$("form").submit(function(){
+		$("#plantillaItemsFactura").remove();
+		return;
+	});
 
 });
 

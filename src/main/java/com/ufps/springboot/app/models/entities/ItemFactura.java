@@ -29,9 +29,12 @@ public class ItemFactura implements Serializable {
 
 	// ------------------------------------------------------
 
+	
+	
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -52,6 +55,14 @@ public class ItemFactura implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 }
