@@ -96,4 +96,18 @@ public class ClienteServiceImpl implements IClienteService {
 		
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Factura fetchByIdClienteItemFacturaProducto(Long id) {
+		// TODO Auto-generated method stub
+		return facturaDao.fetchByIdClienteItemFacturaProducto(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Cliente fetchByIdFactura(Long id) {
+	
+		return clienteDao.fetchByIdFactura(id);
+	}
+
 }
