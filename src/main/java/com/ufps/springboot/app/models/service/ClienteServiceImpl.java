@@ -2,8 +2,7 @@ package com.ufps.springboot.app.models.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,57 +28,72 @@ public class ClienteServiceImpl implements IClienteService {
 	private IFacturaDao facturaDao;
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public List<Cliente> findAll() {
 		// TODO Auto-generated method stub
 		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional
+	@Transactional
 	public void save(Cliente cliente) {
 		clienteDao.save(cliente);
 
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
 
 		return clienteDao.findById(id).orElse(null);
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional
+	@Transactional
 	public void delete(Long id) {
 		clienteDao.deleteById(id);
 
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public Page<Cliente> findAll(Pageable pageable) {
 
 		return clienteDao.findAll(pageable);
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public List<Producto> findByNombre(String term) {
 		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional
+	@Transactional
 	public void saveFactura(Factura factura) {
 		facturaDao.save(factura);
 	}
 
 	@Override
-	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public Producto findProductoById(Long id) {
 		
 		return productoDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Factura findFacturaById(Long id) {
+		
+		return facturaDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public void deleteFactura(Long id) {
+
+		facturaDao.deleteById(id);
+		
 	}
 
 }
