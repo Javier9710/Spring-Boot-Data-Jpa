@@ -11,10 +11,14 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.ufps.springboot.app.auth.handler.LoginSuccesHandler;
+
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+	@Autowired
+	private LoginSuccesHandler loginHandler;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -26,7 +30,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/factura/**").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
-		.formLogin().loginPage("/login")
+		.formLogin()
+			.successHandler(loginHandler)
+			.loginPage("/login")
 		.permitAll()
 		.and()
 		.logout().permitAll()
