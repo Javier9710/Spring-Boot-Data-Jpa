@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ufps.springboot.app.auth.handler.LoginSuccesHandler;
+import com.ufps.springboot.app.models.service.JpaUserDetailsService;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true )
 @Configuration
@@ -28,6 +29,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private JpaUserDetailsService userDetailsService;
 	
 	
 	@Override
@@ -56,11 +60,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception {
 		
-		build.jdbcAuthentication()
-		.dataSource(dataSource)
-		.passwordEncoder(passwordEncoder)
-		.usersByUsernameQuery("select  username, password, enable from users where username=?")
-		.authoritiesByUsernameQuery("select u.username, a.authority from authorities a inner join users u on (a.user_id=u.id) where u.username=?");
+		build.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder);
 		
 		/*PasswordEncoder encoder = passwordEncoder;
 		

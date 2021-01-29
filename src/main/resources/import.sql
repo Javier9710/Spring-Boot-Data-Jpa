@@ -40,3 +40,13 @@ INSERT INTO facturas (create_at, descripcion, observacion, cliente_id) VALUES (N
 INSERT INTO facturas_items (cantidad, producto_id, factura_id) VALUES (2, 1, 1);
 INSERT INTO facturas_items (cantidad, producto_id, factura_id) VALUES (3, 2, 1);
 INSERT INTO facturas_items (cantidad, producto_id, factura_id) VALUES (1, 3, 1);
+
+//Usuarios
+INSERT INTO users (username, password, enable) VALUES ('andres', '$2a$10$vvsE4xVYUD2i7B68IoJo/ur2lwY0K2bApYd/JbzoWO22pjYHAZ9QC', 1);
+INSERT INTO users (username, password, enable) VALUES ('admin', '$2a$10$id9q9DdjdG3LMsJHL4LClORqz9P2J8a2GmX2n9c3qbBnJzsJehpjW', 1);
+
+
+//ROLES
+INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');
+INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_USER');
