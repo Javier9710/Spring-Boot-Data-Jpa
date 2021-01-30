@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -37,7 +38,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 	
 	@Bean
-	public LocaleResolver localResolver() {
+	public LocaleResolver localeResolver() {
 		SessionLocaleResolver localResolver = new SessionLocaleResolver();
 		localResolver.setDefaultLocale(new Locale("es","ES"));
 		return localResolver;
@@ -48,6 +49,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		LocaleChangeInterceptor localInterceptor = new LocaleChangeInterceptor();
 		localInterceptor.setParamName("lang");
 		return localInterceptor;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
 	}
 
 }
