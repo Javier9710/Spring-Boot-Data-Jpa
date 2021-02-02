@@ -14,7 +14,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import com.ufps.springboot.app.models.entities.Cliente;
 
-@Component("listar")
+@Component("listar.csv")
 public class ClienteCsvView extends AbstractView {
 	
 	
