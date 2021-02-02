@@ -17,6 +17,7 @@
 						th:text="'&laquo; Volver'"></a>
 						<a class="btn btn-danger btn-xs float-right mx-2" th:href="@{'/factura/ver/' + ${factura.id}(format=pdf)}">PDF</a>
 						<a class="btn btn-success btn-xs float-right" th:href="@{'/factura/ver/' + ${factura.id}(format=xlsx)}">EXCEL</a>
+				
 				</h4>
 				<ul class="list-group my-2">
 					<li th:text="'Datos del Cliente'"
