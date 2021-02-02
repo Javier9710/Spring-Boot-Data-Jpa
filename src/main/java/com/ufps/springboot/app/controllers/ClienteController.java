@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -44,6 +45,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +56,7 @@ import com.ufps.springboot.app.models.entities.Cliente;
 import com.ufps.springboot.app.models.service.IClienteService;
 import com.ufps.springboot.app.models.service.IUploadFileService;
 import com.ufps.springboot.app.util.paginador.PageRender;
+import com.ufps.springboot.app.view.xml.ClienteList;
 
 
 
@@ -108,6 +111,12 @@ public class ClienteController {
 
 		return "ver";
 
+	}
+	
+	@RequestMapping(value = {"/listar-rest"}, method = RequestMethod.GET)
+	public @ResponseBody ClienteList listarRest() {
+		
+		return new ClienteList(clienteService.findAll());
 	}
 
 	@RequestMapping(value = {"/listar","/"}, method = RequestMethod.GET)
